@@ -205,7 +205,7 @@ fun LogIn(modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.End,
         ) {
             Text(
-                text = "Schedule/Reschedule",
+                text = "Schedule/Reschedule ",
                 fontSize = 12.sp,
                 color = Gray
             )
@@ -225,12 +225,12 @@ fun LogIn(modifier: Modifier = Modifier) {
             horizontalArrangement = Arrangement.End,
         ) {
             Text(
-                text = "New to the app?",
+                text = "New to the app? ",
                 fontSize = 12.sp,
                 color = Gray
             )
             Text(
-                text = " Register",
+                text = "Register",
                 textDecoration = TextDecoration.Underline,
                 fontSize = 12.sp,
                 color = Cherry,
