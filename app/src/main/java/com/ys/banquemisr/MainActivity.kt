@@ -5,8 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -25,7 +23,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -78,7 +75,9 @@ fun LogIn(modifier: Modifier = Modifier) {
         var usernameField by remember { mutableStateOf("Username") }
         var passwordField by remember { mutableStateOf("Password") }
         var showUsernameLabel by remember { mutableStateOf(false) }
-        var isFocused by remember { mutableStateOf(false) }
+        var showPasswordLabel by remember { mutableStateOf(false) }
+        var isFocusedUser by remember { mutableStateOf(false) }
+        var isFocusedPass by remember { mutableStateOf(false) }
         OutlinedTextField(
             value = usernameField,
             onValueChange = { usernameField = it },
@@ -94,15 +93,55 @@ fun LogIn(modifier: Modifier = Modifier) {
                 .padding(top = 32.dp, bottom = 16.dp)
                 .fillMaxWidth()
                 .height(64.dp)
-
-                .onFocusChanged { isFocused = it.isFocused },
-            textStyle = TextStyle(Color.LightGray, fontSize = 16.sp),
+                .onFocusChanged {
+                    isFocusedUser = it.isFocused && !isFocusedUser
+                    if (isFocusedUser) {
+                        showUsernameLabel = true
+                        if (usernameField == "Username")
+                            usernameField = ""
+                    }
+                },
+            textStyle =
+            if (usernameField == "Username") TextStyle(Color.LightGray, fontSize = 16.sp)
+            else TextStyle(Color.Black, fontSize = 16.sp, fontWeight = FontWeight.Bold),
             colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = Color.Gray,
                 unfocusedBorderColor = Color.LightGray
             )
         )
+        var passwordVisible by remember { mutableStateOf(false) }
+        OutlinedTextField(
+            value = passwordField,
+            onValueChange = { passwordField = it },
+            label = {
+                if (showPasswordLabel)
+                    Text(
+                        text = "Password",
+                        color = Color.DarkGray
+                    )
+            },
+            modifier = modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(bottom = 16.dp)
+                .fillMaxWidth()
+                .height(64.dp)
+                .onFocusChanged {
+                    isFocusedPass = it.isFocused && !isFocusedPass
+                    if (isFocusedPass) {
+                        showPasswordLabel = true
+                        if (passwordField == "Password")
+                            passwordField = ""
+                    }
+                },
+            textStyle =
+            if (passwordField == "Password") TextStyle(Color.LightGray, fontSize = 16.sp)
+            else TextStyle(Color.Black, fontSize = 16.sp, fontWeight = FontWeight.Bold),
+            colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
+                focusedBorderColor = Color.Gray,
+                unfocusedBorderColor = Color.LightGray
+            )
 
+        )
 
     }
 }
