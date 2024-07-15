@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Banque Misr</string>
+    <string name="banque_misr_icon">Banque Misr Icon</string>
+    <string name="ar_translation">العربية</string>
+</resources>
