@@ -5,7 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -37,9 +39,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ys.banquemisr.ui.theme.BanqueMisrTheme
@@ -61,7 +65,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun LogIn(modifier: Modifier = Modifier) {
-
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -184,19 +187,23 @@ fun LogIn(modifier: Modifier = Modifier) {
             modifier = modifier
                 .align(Alignment.CenterHorizontally)
                 .padding(top = 24.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .height(56.dp),
             shape = RoundedCornerShape(8.dp),
+
             colors = ButtonDefaults.buttonColors(
                 containerColor =
                 if (usernameField != "Username" && usernameField != ""
-                    && passwordField != "Password" && passwordField != "")
-                    Cherry else LightCherry
+                    && passwordField != "Password" && passwordField != ""
+                )
+                    Cherry else LightCherry,
             )
 
         ) {
             Text(
                 text = "LOG IN",
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                fontSize = 16.sp
             )
         }
 
@@ -204,7 +211,7 @@ fun LogIn(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 14.dp),
-            horizontalArrangement = Arrangement.End,
+            horizontalArrangement = Arrangement.End
         ) {
             Text(
                 text = "Schedule/Reschedule ",
@@ -223,7 +230,7 @@ fun LogIn(modifier: Modifier = Modifier) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 14.dp),
+                .padding(top = 14.dp, bottom = 32.dp),
             horizontalArrangement = Arrangement.End,
         ) {
             Text(
@@ -239,7 +246,78 @@ fun LogIn(modifier: Modifier = Modifier) {
                 fontWeight = FontWeight.Bold
             )
         }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(1.dp)
+                .background(Color.LightGray)
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 14.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.loan_calc),
+                contentDescription = null,
+                modifier = Modifier.size(56.dp)
+            )
 
+            Image(
+                painter = painterResource(id = R.drawable.our_products),
+                contentDescription = null,
+                modifier = Modifier.size(56.dp)
+            )
+
+
+            Image(
+                painter = painterResource(id = R.drawable.nearest_branch_or_atm),
+                contentDescription = null,
+                modifier = Modifier.size(56.dp)
+            )
+
+            Image(
+                painter = painterResource(id = R.drawable.exchange_rate),
+                contentDescription = null,
+                modifier= Modifier.size(56.dp)
+            )
+
+
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 1.dp),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ){
+            Text(
+                text = "Loan\ncalculator",
+                textAlign = TextAlign.Center,
+                color = Color.Black,
+                fontSize = 12.sp,
+                lineHeight = 14.sp
+            )
+            Text(
+                text = "Our products",
+                textAlign = TextAlign.Center,
+                color = Color.Black,
+                fontSize = 12.sp
+            )
+            Text(
+                text = "Branch/ATM",
+                textAlign = TextAlign.Center,
+                color = Color.Black,
+                fontSize = 12.sp
+            )
+            Text(
+                text = "Exchange\nrates",
+                textAlign = TextAlign.Center,
+                color = Color.Black,
+                fontSize = 12.sp,
+                lineHeight = 14.sp
+            )
+        }
 
 
     }
