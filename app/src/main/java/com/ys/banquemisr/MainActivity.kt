@@ -1,6 +1,5 @@
 package com.ys.banquemisr
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,11 +18,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -46,10 +44,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ys.banquemisr.ui.theme.BanqueMisrTheme
 import com.ys.banquemisr.ui.theme.Cherry
 import com.ys.banquemisr.ui.theme.Gray
 import com.ys.banquemisr.ui.theme.LightCherry
@@ -80,13 +76,15 @@ fun LogIn(modifier: Modifier = Modifier) {
                 painter = painterResource(id = R.drawable.bm_icon),
                 contentDescription = stringResource(R.string.banque_misr_icon)
             )
-            Text(
-                text = stringResource(R.string.ar_translation),
-                fontWeight = FontWeight.Bold,
-                color = Cherry,
-                fontSize = 16.sp,
-                fontFamily = FontFamily(Font(R.font.change, FontWeight.Normal))
-            )
+            TextButton(onClick = { /* Your button click logic here */ }) {
+                Text(
+                    text = stringResource(R.string.ar_translation),
+                    fontWeight = FontWeight.Bold,
+                    color = Cherry,
+                    fontSize =16.sp,
+                    fontFamily = FontFamily(Font(R.font.change, FontWeight.Normal))
+                )
+            }
         }
         var usernameField by remember { mutableStateOf("Username") }
         var passwordField by remember { mutableStateOf("Password") }
@@ -194,8 +192,8 @@ fun LogIn(modifier: Modifier = Modifier) {
 
             colors = ButtonDefaults.buttonColors(
                 containerColor =
-                if (usernameField != "Username" && usernameField != ""
-                    && passwordField != "Password" && passwordField != ""
+                if (usernameField != "Username" && usernameField.isNotBlank()
+                    && passwordField != "Password" && passwordField.isNotBlank()
                 )
                     Cherry else LightCherry,
             )
@@ -207,123 +205,129 @@ fun LogIn(modifier: Modifier = Modifier) {
                 fontSize = 16.sp
             )
         }
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 14.dp),
-            horizontalArrangement = Arrangement.End
-        ) {
-            Text(
-                text = "Schedule/Reschedule ",
-                fontSize = 12.sp,
-                color = Gray
-            )
-            Text(
-                text = "Branch Visit",
-                textDecoration = TextDecoration.Underline,
-                fontSize = 12.sp,
-                color = Cherry,
-                fontWeight = FontWeight.Bold
-            )
-        }
-
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 14.dp, bottom = 32.dp),
-            horizontalArrangement = Arrangement.End,
-        ) {
-            Text(
-                text = "New to the app? ",
-                fontSize = 12.sp,
-                color = Gray
-            )
-            Text(
-                text = "Register",
-                textDecoration = TextDecoration.Underline,
-                fontSize = 12.sp,
-                color = Cherry,
-                fontWeight = FontWeight.Bold
-            )
-        }
+        SuggestionHyperlinks()
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(1.dp)
                 .background(Color.LightGray)
         )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 14.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.loan_calc),
-                contentDescription = null,
-                modifier = Modifier.size(56.dp)
-            )
-
-            Image(
-                painter = painterResource(id = R.drawable.our_products),
-                contentDescription = null,
-                modifier = Modifier.size(56.dp)
-            )
-
-
-            Image(
-                painter = painterResource(id = R.drawable.nearest_branch_or_atm),
-                contentDescription = null,
-                modifier = Modifier.size(56.dp)
-            )
-
-            Image(
-                painter = painterResource(id = R.drawable.exchange_rate),
-                contentDescription = null,
-                modifier= Modifier.size(56.dp)
-            )
-
-
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 1.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ){
-            Text(
-                text = "Loan\ncalculator",
-                textAlign = TextAlign.Center,
-                color = Color.Black,
-                fontSize = 12.sp,
-                lineHeight = 14.sp
-            )
-            Text(
-                text = "Our products",
-                textAlign = TextAlign.Center,
-                color = Color.Black,
-                fontSize = 12.sp
-            )
-            Text(
-                text = "Branch/ATM",
-                textAlign = TextAlign.Center,
-                color = Color.Black,
-                fontSize = 12.sp
-            )
-            Text(
-                text = "Exchange\nrates",
-                textAlign = TextAlign.Center,
-                color = Color.Black,
-                fontSize = 12.sp,
-                lineHeight = 14.sp
-            )
-        }
-
-
+        FeaturesAndIcons()
     }
 }
 
+@Composable
+fun SuggestionHyperlinks() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 14.dp),
+        horizontalArrangement = Arrangement.End
+    ) {
+        Text(
+            text = "Schedule/Reschedule ",
+            fontSize = 12.sp,
+            color = Gray
+        )
+        Text(
+            text = "Branch Visit",
+            textDecoration = TextDecoration.Underline,
+            fontSize = 12.sp,
+            color = Cherry,
+            fontWeight = FontWeight.Bold
+        )
+    }
+
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 14.dp, bottom = 32.dp),
+        horizontalArrangement = Arrangement.End,
+    ) {
+        Text(
+            text = "New to the app? ",
+            fontSize = 12.sp,
+            color = Gray
+        )
+        Text(
+            text = "Register",
+            textDecoration = TextDecoration.Underline,
+            fontSize = 12.sp,
+            color = Cherry,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+@Composable
+fun FeaturesAndIcons(){
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 14.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.loan_calc),
+            contentDescription = null,
+            modifier = Modifier.size(56.dp)
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.our_products),
+            contentDescription = null,
+            modifier = Modifier.size(56.dp)
+        )
+
+
+        Image(
+            painter = painterResource(id = R.drawable.nearest_branch_or_atm),
+            contentDescription = null,
+            modifier = Modifier.size(56.dp)
+        )
+
+        Image(
+            painter = painterResource(id = R.drawable.exchange_rate),
+            contentDescription = null,
+            modifier= Modifier.size(56.dp)
+        )
+
+
+    }
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 1.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ){
+        Text(
+            text = "Loan\ncalculator",
+            textAlign = TextAlign.Center,
+            color = Color.Black,
+            fontSize = 12.sp,
+            lineHeight = 14.sp
+        )
+        Text(
+            text = "Our products",
+            textAlign = TextAlign.Center,
+            color = Color.Black,
+            fontSize = 12.sp
+        )
+        Text(
+            text = "Branch/ATM",
+            textAlign = TextAlign.Center,
+            color = Color.Black,
+            fontSize = 12.sp
+        )
+        Text(
+            text = "Exchange\nrates",
+            textAlign = TextAlign.Center,
+            color = Color.Black,
+            fontSize = 12.sp,
+            lineHeight = 14.sp
+        )
+    }
+}
 
 @Preview(showBackground = true)
 @Composable
