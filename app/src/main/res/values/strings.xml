@@ -1,5 +1,17 @@
 <resources>
-    <string name="app_name">Banque Misr</string>
-    <string name="banque_misr_icon">Banque Misr Icon</string>
-    <string name="ar_translation">العربية</string>
+    <string name="app_name" translatable="false">Banque Misr</string>
+    <string name="banque_misr_icon" translatable="false">Banque Misr Icon</string>
+    <string name="log_in">LOG IN</string>
+    <string name="forgot_password_username">Forgot password/username?</string>
+    <string name="schedule_reschedule">"Schedule/Reschedule "</string>
+    <string name="branch_visit">Branch Visit</string>
+    <string name="new_to_the_app">"New to the app? "</string>
+    <string name="register">Register</string>
+    <string name="loan_calculator">Loan\ncalculator</string>
+    <string name="our_products">Our products</string>
+    <string name="branch_atm">Branch/ATM</string>
+    <string name="exchange_rates">Exchange\nrates</string>
+    <string name="language">العربية</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>
