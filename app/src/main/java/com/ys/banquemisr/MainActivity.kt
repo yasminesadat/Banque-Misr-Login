@@ -2,7 +2,6 @@ package com.ys.banquemisr
 
 import android.app.LocaleManager
 import android.content.Context
-import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.Bundle
 import android.os.LocaleList
@@ -251,10 +250,8 @@ fun FeaturesAndIcons() {
 }
 
 @Composable
-fun AppFeature(@StringRes feature: Int, @DrawableRes icon: Int, modifier: Modifier = Modifier) {
-    Column(
-
-    ) {
+fun AppFeature(@StringRes feature: Int, @DrawableRes icon: Int) {
+    Column{
         Image(
             painter = painterResource(id = icon),
             contentDescription = null,
